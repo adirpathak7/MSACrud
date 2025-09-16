@@ -48,7 +48,6 @@ public class ExampleServlet extends HttpServlet {
             out.println("<title>Servlet ExampleServlet</title>");
             out.println("</head>");
             out.println("<body>");
-//            out.println("<h1>Servlet MSAServlet at " + request.getContextPath() + "</h1>");
             out.println("<h1>Doctors " + serviceInterface.get() + "</h1>");
 
             Response res = serviceInterface.getAllDoctors();
@@ -56,6 +55,7 @@ public class ExampleServlet extends HttpServlet {
             if (res.hasEntity()) {
                 List list = res.readEntity(List.class);
 
+                // for design
                 out.println("<table border='1px' cellpadding='8'>");
                 out.println("<tr>");
                 out.println("<th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th>");
@@ -74,6 +74,7 @@ public class ExampleServlet extends HttpServlet {
                 }
                 out.println("</table>");
 
+                // you can do only this
 //                out.println("<h2>Doctors: " + list.toString() + "</h2>");
             } else {
                 out.println("<h4>No data found!</h4>");

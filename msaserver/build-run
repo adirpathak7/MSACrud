@@ -1,5 +1,0 @@
-#!/bin/sh
-mvn clean package
-docker build -t adityarp@7/msaserver .
-docker rm -f msaserver 2>/dev/null || true
-docker run -it --name msaserver -p 8080:8080 --name msaserver adityarp@7/msaserver

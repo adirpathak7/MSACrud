@@ -1,5 +1,0 @@
-#!/bin/sh
-mvn clean package
-docker build -t adityarp@7/msaclient .
-docker rm -f msaclient 2>/dev/null || true
-docker run -it --name msaclient -p 8080:8080 --name msaclient adityarp@7/msaclient

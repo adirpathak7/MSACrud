@@ -56,7 +56,7 @@ public class ExampleServlet extends HttpServlet {
             if (res.hasEntity()) {
                 List list = res.readEntity(List.class);
 
-                out.println("<table border='2px solid black' cellpadding='8'>");
+                out.println("<table border='1px' cellpadding='8'>");
                 out.println("<tr>");
                 out.println("<th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th>");
                 out.println("</tr>");
@@ -64,7 +64,7 @@ public class ExampleServlet extends HttpServlet {
                 for (Object obj : list) {
                     Map map = (Map) obj;
                     out.println("<tr>");
-                    out.println("<td>" + map.get("doctorid") + "</td>");
+                    out.println("<td>" + map.get("doctorId") + "</td>");
                     out.println("<td>" + map.get("doctorName") + "</td>");
                     out.println("<td>" + map.get("address") + "</td>");
                     out.println("<td>" + map.get("specialization") + "</td>");

@@ -1,0 +1,5 @@
+#!/bin/sh
+mvn clean package
+docker build -t aadityarp@7/ClientApp .
+docker rm -f ClientApp 2>/dev/null || true
+docker run -it --name ClientApp -p 8080:8080 --name ClientApp aadityarp@7/ClientApp

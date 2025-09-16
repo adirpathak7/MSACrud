@@ -1,0 +1,10 @@
+{
+    "iss": "airhacks",
+    "jti": "42",
+    "sub": "duke",
+    "upn": "duke",
+    "groups": [
+        "admin",
+        "stockUser"
+    ]
+}

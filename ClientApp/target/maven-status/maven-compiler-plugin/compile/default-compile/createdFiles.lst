@@ -1,0 +1,8 @@
+com\it\clientapp\config\Producers.class
+com\it\clientapp\stock\ExampleServlet.class
+com\it\clientapp\entity\Doctorsappointment.class
+com\it\clientapp\config\CrossOriginResourceSharingFilter.class
+com\it\clientapp\config\BootStrap.class
+com\it\clientapp\service\ExampleService.class
+com\it\clientapp\service\HealthCheckService.class
+com\it\clientapp\stock\ServiceInterface.class

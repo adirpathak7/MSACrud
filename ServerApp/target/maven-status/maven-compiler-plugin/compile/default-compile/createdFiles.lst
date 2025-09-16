@@ -1,0 +1,8 @@
+com\it\serverapp\config\Producers.class
+com\it\serverapp\service\ExampleService.class
+com\it\serverapp\entity\Stock.class
+com\it\serverapp\ejb\DoctorBean.class
+com\it\serverapp\config\BootStrap.class
+com\it\serverapp\config\CrossOriginResourceSharingFilter.class
+com\it\serverapp\entity\Doctorsappointment.class
+com\it\serverapp\service\HealthCheckService.class

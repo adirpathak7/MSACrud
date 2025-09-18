@@ -141,5 +141,5 @@ public class Doctorsappointment implements Serializable {
     public String toString() {
         return "com.it.serverapp.entity.Doctorsappointment[ doctorId=" + doctorId + " ]";
     }
-    
+
 }

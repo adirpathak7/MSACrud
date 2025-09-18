@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.it.clientapp.stock;
+package com.it.clientapp.doctor;
 
 import com.it.clientapp.entity.Doctorsappointment;
 import jakarta.inject.Inject;
@@ -41,43 +41,72 @@ public class ExampleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ExampleServlet</title>");
+            out.println("<title>Doctor Appointment</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Doctors " + serviceInterface.get() + "</h1>");
 
-            Response res = serviceInterface.getAllDoctors();
+            out.println("<h1>Search Doctors by Specialization</h1>");
 
-            if (res.hasEntity()) {
+            // Form with dropdown
+            out.println("<form method='post' action='ExampleServlet'>");
+            out.println("Select Specialization: ");
+            out.println("<select name='specialization'>");
+            out.println("<option value=''>-- Select --</option>");
+            out.println("<option value='Cardiology'>Cardiology</option>");
+            out.println("<option value='Neurology'>Neurology</option>");
+            out.println("<option value='Orthopedics'>Orthopedics</option>");
+            out.println("<option value='Pediatrics'>Pediatrics</option>");
+            out.println("<option value='Dermatology'>Dermatology</option>");
+            out.println("</select>");
+            out.println("<input type='submit' value='Search'>");
+            out.println("</form><br><br>");
+
+            // Determine which API to call based on form submission
+            String specialization = request.getParameter("specialization");
+            Response res;
+
+            if (specialization != null && !specialization.trim().isEmpty()) {
+                // Call searchBySpecialization API (must pass spec to backend API)
+                res = serviceInterface.searchBySpecialization(specialization);
+//                out.print("res data:- " + res);
+                out.println("<h2>Filtered Doctors for: " + specialization + "</h2>");
+            } else {
+                // Show all doctors by default
+                res = serviceInterface.getAllDoctors();
+                out.println("<h2>All Doctors</h2>");
+            }
+
+            if (res != null && res.hasEntity()) {
                 List list = res.readEntity(List.class);
 
-                // for design
-                out.println("<table border='1px' cellpadding='8'>");
-                out.println("<tr>");
-                out.println("<th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th>");
-                out.println("</tr>");
-
-                for (Object obj : list) {
-                    Map map = (Map) obj;
+                if (list != null && !list.isEmpty()) {
+                    out.println("<table border='1' cellpadding='8'>");
                     out.println("<tr>");
-                    out.println("<td>" + map.get("doctorId") + "</td>");
-                    out.println("<td>" + map.get("doctorName") + "</td>");
-                    out.println("<td>" + map.get("address") + "</td>");
-                    out.println("<td>" + map.get("specialization") + "</td>");
-                    out.println("<td>" + map.get("fromTime") + "</td>");
-                    out.println("<td>" + map.get("toTime") + "</td>");
+                    out.println("<th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th>");
                     out.println("</tr>");
-                }
-                out.println("</table>");
 
-                // you can do only this
-//                out.println("<h2>Doctors: " + list.toString() + "</h2>");
+                    for (Object obj : list) {
+                        Map map = (Map) obj;
+                        out.println("<tr>");
+                        out.println("<td>" + map.get("doctorId") + "</td>");
+                        out.println("<td>" + map.get("doctorName") + "</td>");
+                        out.println("<td>" + map.get("address") + "</td>");
+                        out.println("<td>" + map.get("specialization") + "</td>");
+                        out.println("<td>" + map.get("fromTime") + "</td>");
+                        out.println("<td>" + map.get("toTime") + "</td>");
+                        out.println("</tr>");
+                    }
+
+                    out.println("</table>");
+                } else {
+                    out.println("<h4>No doctors found.</h4>");
+                }
+
             } else {
-                out.println("<h4>No data found!</h4>");
+                out.println("<h4>No data received from server.</h4>");
             }
 
             out.println("</body>");

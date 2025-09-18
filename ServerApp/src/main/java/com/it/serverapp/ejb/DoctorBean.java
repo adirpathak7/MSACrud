@@ -16,12 +16,20 @@ import java.util.List;
  */
 @Stateless
 public class DoctorBean {
-    
+
     @PersistenceContext(unitName = "mypu")
     EntityManager entityManager;
-    
-    public List<Doctorsappointment> getAllDoctors(){
+
+    public List<Doctorsappointment> getAllDoctors() {
         List<Doctorsappointment> list = entityManager.createNamedQuery("Doctorsappointment.findAll").getResultList();
         return list;
     }
+
+    public List<Doctorsappointment> getDoctorsBySpecialization(String specialization) {
+        List<Doctorsappointment> list = entityManager.createNamedQuery("Doctorsappointment.findBySpecialization", Doctorsappointment.class)
+                .setParameter("specialization", specialization)
+                .getResultList();
+        return list;
+    }
+
 }

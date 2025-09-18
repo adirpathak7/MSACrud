@@ -5,6 +5,6 @@
     "upn": "duke",
     "groups": [
         "admin",
-        "stockUser"
+        "user"
     ]
 }

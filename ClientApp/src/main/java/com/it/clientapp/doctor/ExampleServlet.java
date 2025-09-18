@@ -4,7 +4,6 @@
  */
 package com.it.clientapp.doctor;
 
-import com.it.clientapp.entity.Doctorsappointment;
 import jakarta.inject.Inject;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
@@ -64,39 +62,35 @@ public class ExampleServlet extends HttpServlet {
             out.println("<input type='submit' value='Search'>");
             out.println("</form><br><br>");
 
-            // Determine which API to call based on form submission
+            // Determine which API to call
             String specialization = request.getParameter("specialization");
             Response res;
 
             if (specialization != null && !specialization.trim().isEmpty()) {
-                // Call searchBySpecialization API (must pass spec to backend API)
                 res = serviceInterface.searchBySpecialization(specialization);
-//                out.print("res data:- " + res);
                 out.println("<h2>Filtered Doctors for: " + specialization + "</h2>");
             } else {
-                // Show all doctors by default
                 res = serviceInterface.getAllDoctors();
                 out.println("<h2>All Doctors</h2>");
             }
 
+            // Simplified data rendering
             if (res != null && res.hasEntity()) {
-                List list = res.readEntity(List.class);
+                List<?> doctors = res.readEntity(List.class);
 
-                if (list != null && !list.isEmpty()) {
-                    out.println("<table border='1' cellpadding='8'>");
-                    out.println("<tr>");
-                    out.println("<th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th>");
-                    out.println("</tr>");
+                if (doctors != null && !doctors.isEmpty()) {
+                    out.println("<table border='1'>");
+                    out.println("<tr><th>ID</th><th>Name</th><th>Address</th><th>Specialization</th><th>From</th><th>To</th></tr>");
 
-                    for (Object obj : list) {
-                        Map map = (Map) obj;
+                    for (Object obj : doctors) {
+                        Map<?, ?> doc = (Map<?, ?>) obj;
                         out.println("<tr>");
-                        out.println("<td>" + map.get("doctorId") + "</td>");
-                        out.println("<td>" + map.get("doctorName") + "</td>");
-                        out.println("<td>" + map.get("address") + "</td>");
-                        out.println("<td>" + map.get("specialization") + "</td>");
-                        out.println("<td>" + map.get("fromTime") + "</td>");
-                        out.println("<td>" + map.get("toTime") + "</td>");
+                        out.println("<td>" + doc.get("doctorId") + "</td>");
+                        out.println("<td>" + doc.get("doctorName") + "</td>");
+                        out.println("<td>" + doc.get("address") + "</td>");
+                        out.println("<td>" + doc.get("specialization") + "</td>");
+                        out.println("<td>" + doc.get("fromTime") + "</td>");
+                        out.println("<td>" + doc.get("toTime") + "</td>");
                         out.println("</tr>");
                     }
 
@@ -104,7 +98,6 @@ public class ExampleServlet extends HttpServlet {
                 } else {
                     out.println("<h4>No doctors found.</h4>");
                 }
-
             } else {
                 out.println("<h4>No data received from server.</h4>");
             }

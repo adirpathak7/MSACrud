@@ -48,7 +48,6 @@ public class ExampleServlet extends HttpServlet {
 
             out.println("<h1>Search Doctors by Specialization</h1>");
 
-            // Form with dropdown
             out.println("<form method='post' action='ExampleServlet'>");
             out.println("Select Specialization: ");
             out.println("<select name='specialization'>");
@@ -62,7 +61,6 @@ public class ExampleServlet extends HttpServlet {
             out.println("<input type='submit' value='Search'>");
             out.println("</form><br><br>");
 
-            // Determine which API to call
             String specialization = request.getParameter("specialization");
             Response res;
 
@@ -74,7 +72,6 @@ public class ExampleServlet extends HttpServlet {
                 out.println("<h2>All Doctors</h2>");
             }
 
-            // Simplified data rendering
             if (res != null && res.hasEntity()) {
                 List<?> doctors = res.readEntity(List.class);
 

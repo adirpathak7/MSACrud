@@ -107,7 +107,6 @@ Secure your API with:
 
 18.  Add JWT token to ClientApp
 19.  In ClientApp:
-•	Create DTO/entity class (getters/setters only)
 •	Create an interface to define ServerApp APIs
 •	In the interface, add a method to fetch JWT
 20.  Inject the interface into servlets

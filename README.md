@@ -121,7 +121,7 @@ Application	URL
 ServerApp	http://localhost:8085/ServerApp/rest/example
 ClientApp	http://localhost:8086/ClientApp/ExampleServlet
 
-
+Developed By:- Aaditya Pathak R.
 
 
 

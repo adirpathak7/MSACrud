@@ -30,20 +30,20 @@ public interface ServiceInterface {
     @GET
     @Path("/getAllDoctors")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin", "user"})
+    @RolesAllowed("Admin")
     @ClientHeaderParam(name = "Authorization", value = "{getToken}")
     public Response getAllDoctors();
 
     @GET
     @Path("/searchBySpecialization/{specialization}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("admin")
+    @RolesAllowed("Admin")
     @ClientHeaderParam(name = "Authorization", value = "{getToken}")
     public Response searchBySpecialization(@PathParam("specialization") String specialization);
 
     default String getToken() {
         Config config = ConfigProvider.getConfig();
-        String token = "Bearer " + config.getValue("jwt", String.class);;
+        String token = "Bearer " + config.getValue("jwt", String.class);
         return token;
     }
 }

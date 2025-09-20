@@ -27,16 +27,16 @@ public class ExampleService {
     @Path("/getAllDoctors")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"admin", "users"})
+    @RolesAllowed("Admin")
     public Response getAllDoctors() {
-        List<Doctorsappointment> list = doctorBean.getAllDoctors();
+        List<Doctorsappointment> list = doctorBean.getAllDoctor();
         return Response.ok(list).build();
     }
 
     @Path("/searchBySpecialization/{specialization}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("user")
+    @RolesAllowed("Admin")
     public Response searchBySpecialization(@PathParam("specialization") String specialization) {
         List<Doctorsappointment> list = doctorBean.getDoctorsBySpecialization(specialization);
         return Response.ok(list).build();

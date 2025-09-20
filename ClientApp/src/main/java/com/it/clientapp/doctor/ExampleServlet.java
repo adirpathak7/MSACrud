@@ -46,6 +46,9 @@ public class ExampleServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
 
+            out.println("<h1> get" + serviceInterface.getAllDoctors() + "</h1>");
+            out.println("<h1> search" + serviceInterface.searchBySpecialization("Neurology") + "</h1>");
+
             out.println("<h1>Search Doctors by Specialization</h1>");
 
             out.println("<form method='post' action='ExampleServlet'>");
@@ -71,7 +74,22 @@ public class ExampleServlet extends HttpServlet {
                 res = serviceInterface.getAllDoctors();
                 out.println("<h2>All Doctors</h2>");
             }
-
+            
+            
+//            String url = req.getReqUrl().toStrin;
+//
+//            string s = req.getPara("search")
+//
+//            string[] path = url.split("/")
+//
+//            string searchName = path[path.length - 1]
+//
+//            if (s != null) {
+//                res = interface  
+//                
+//            
+//            find(searchName)
+}
             if (res != null && res.hasEntity()) {
                 List<?> doctors = res.readEntity(List.class);
 

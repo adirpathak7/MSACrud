@@ -28,7 +28,13 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Doctorsappointment.findByAddress", query = "SELECT d FROM Doctorsappointment d WHERE d.address = :address"),
     @NamedQuery(name = "Doctorsappointment.findBySpecialization", query = "SELECT d FROM Doctorsappointment d WHERE d.specialization = :specialization"),
     @NamedQuery(name = "Doctorsappointment.findByFromTime", query = "SELECT d FROM Doctorsappointment d WHERE d.fromTime = :fromTime"),
-    @NamedQuery(name = "Doctorsappointment.findByToTime", query = "SELECT d FROM Doctorsappointment d WHERE d.toTime = :toTime")})
+    @NamedQuery(
+            name = "Doctor.findBySpecializationName",
+            query = "SELECT d FROM Doctor d WHERE d.specialization.sepname = :sepname"
+    ),
+@NamedQuery(name = "Doctorsappointment.findByToTime", query = "SELECT d FROM Doctorsappointment d WHERE d.toTime = :toTime")
+
+})
 public class Doctorsappointment implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -20,10 +20,7 @@ public class DoctorBean {
     @PersistenceContext(unitName = "mypu")
     EntityManager entityManager;
 
-    public List<Doctorsappointment> getAllDoctors() {
-        List<Doctorsappointment> list = entityManager.createNamedQuery("Doctorsappointment.findAll").getResultList();
-        return list;
-    }
+   
 
     public List<Doctorsappointment> getDoctorsBySpecialization(String specialization) {
         List<Doctorsappointment> list = entityManager.createNamedQuery("Doctorsappointment.findBySpecialization", Doctorsappointment.class)
@@ -32,4 +29,8 @@ public class DoctorBean {
         return list;
     }
 
+    public List<Doctorsappointment> getAllDoctor(){
+        List<Doctorsappointment> list = entityManager.createNamedQuery("Doctorsappointment.findAll").getResultList();
+        return list;
+    }
 }

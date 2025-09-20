@@ -4,7 +4,6 @@
     "sub": "duke",
     "upn": "duke",
     "groups": [
-        "admin",
-        "user"
+        "Admin"
     ]
 }
